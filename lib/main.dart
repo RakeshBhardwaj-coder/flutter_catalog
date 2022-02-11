@@ -44,11 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
         primarySwatch: Colors.deepPurple,
 
       ),
-      initialRoute: "/home",
+      initialRoute: "/login",
       routes: {
-        "/" :(context) => LoginPage(),
-        "/home":((context) => HomePage()),
-        "/login":((context) => LoginPage())
+        "/" :(context) => const LoginPage(),
+        "/home":((context) => const HomePage()),
+        "/login":((context) => const LoginPage())
       },
     );
   }
