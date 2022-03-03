@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/widgets/drawer.dart';
+
 
 class HomePage extends StatelessWidget {
   final String name = "Rakesh charj";
@@ -10,7 +12,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hello Rakesh"),
+        
       ),
+      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +24,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      drawer: const Drawer(),
+      drawer:const MyDrawer() ,
     );
   }
 }
