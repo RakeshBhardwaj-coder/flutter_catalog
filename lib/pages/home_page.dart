@@ -4,6 +4,7 @@ import 'package:flutter_catalog/widgets/drawer.dart';
 import 'package:flutter_catalog/widgets/item_widgets.dart';
 
 import '../models/catalog.dart';
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,10 +24,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     loadData();
   }
+
 //get the json file in code
   loadData() async {
     var catalogJson = await rootBundle.loadString("files/catalog.json");
-    print(catalogJson);
+    // print(catalogJson);
+    var decodeJson = jsonDecode(catalogJson);
+    // print(decodeJson);
   }
 
   @override
