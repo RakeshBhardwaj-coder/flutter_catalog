@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_catalog/widgets/drawer.dart';
 import 'package:flutter_catalog/widgets/item_widgets.dart';
 
 import '../models/catalog.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final String name = "Rakesh charj";
+
   final int day = 5;
 
-  const HomePage({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+//get the json file in code
+  loadData() async {
+    var catalogJson = await rootBundle.loadString("files/catalog.json");
+    print(catalogJson);
+  }
+
   @override
   Widget build(BuildContext context) {
     final demoList = List.generate(50, (index) => CatalogModel.items[0]);
