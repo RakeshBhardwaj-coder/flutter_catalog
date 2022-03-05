@@ -31,11 +31,19 @@ class _HomePageState extends State<HomePage> {
     // print(catalogJson);
     var decodeJson = jsonDecode(catalogJson);
     // print(decodeJson);
+    var productData = decodeJson["products"];
+    // print(productData);
+
+    CatalogModel.items = List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {
+      
+    });
+  
   }
 
   @override
   Widget build(BuildContext context) {
-    final demoList = List.generate(50, (index) => CatalogModel.items[0]);
+    // final demoList = List.generate(50, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hello Rakesh"),
@@ -43,10 +51,11 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.builder(
-          itemCount: demoList.length,
+          itemCount: CatalogModel.items.length,
           itemBuilder: (context, index) {
             return ItemWidget(
-              item: demoList[index],
+              item: CatalogModel.items[index],
+              
             );
           },
         ),
