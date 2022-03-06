@@ -54,11 +54,23 @@ class _HomePageState extends State<HomePage> {
         child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)?
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16),
                 itemBuilder: (context, index) {
                   final item = CatalogModel.items?[index];
-                  return GridTile(
-                    child: Image.network(item!.image),
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    child: GridTile(
+                      header: Text(item!.name),
+                      child: Image.network(item.image),
+                      footer: Text(item.price.toString(),
+                      style: const TextStyle(color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold),
+                      
+                      ),
+                    ),
                   );
                 },
                 itemCount: CatalogModel.items?.length,
