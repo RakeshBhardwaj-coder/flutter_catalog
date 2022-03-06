@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 //get the json file in code
   loadData() async {
 // delay function for 2 sec to avoid error
-  await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 2));
 
     var catalogJson = await rootBundle.loadString("files/catalog.json");
     // print(catalogJson);
@@ -37,11 +37,9 @@ class _HomePageState extends State<HomePage> {
     var productData = decodeJson["products"];
     // print(productData);
 
-    CatalogModel.items = List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
-    setState(() {
-      
-    });
-  
+    CatalogModel.items =
+        List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {});
   }
 
   @override
@@ -53,15 +51,21 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items!=null && CatalogModel.items!.isNotEmpty)? ListView.builder(
-          itemCount: CatalogModel.items?.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-              item: CatalogModel.items![index],
-              
-            );
-          },
-        ):Center(child: CircularProgressIndicator(),),
+        child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)?
+            GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.items?[index];
+                  return GridTile(
+                    child: Image.network(item!.image),
+                  );
+                },
+                itemCount: CatalogModel.items?.length,
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: const MyDrawer(),
     );
